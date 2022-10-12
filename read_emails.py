@@ -95,12 +95,14 @@ def parse_body(body):
     all_stories = []
     headlines = soup.find_all('h1')
     texts = soup.find_all('div', style="font-family:sans-serif")
+    if len(texts) == 0:
+        texts = soup.find_all('div', style="font-family: sans-serif")
     regions = soup.find_all('span', style="font-size:13px;")
     texts.remove(texts[0])  # remove date
     texts.remove(texts[-1])  # remove Email preferences
     final_texts = []
     for i in texts:
-        if i.getText() == 'Analysis':  # remove any analysis and it's associated text
+        if i.getText().strip() == 'Analysis':  # remove any analysis and it's associated text
             texts.remove(texts[texts.index(i) + 1])
             texts.remove(texts[texts.index(i)])
     for i in texts:
