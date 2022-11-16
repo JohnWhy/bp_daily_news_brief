@@ -19,7 +19,7 @@ def get_news_channel():
     for e in client.guilds:
         if e.id == 600796603967602724:
             for chan in e.channels:
-                if chan.id == 773402321739710465:
+                if chan.id == 999327978708275262:
                     return chan
 
 
