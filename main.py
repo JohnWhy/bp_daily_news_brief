@@ -19,7 +19,7 @@ def get_news_channel():
     for e in client.guilds:
         if e.id == 600796603967602724:
             for chan in e.channels:
-                if chan.id == 773402321739710465:
+                if chan.id == 999327978708275262:
                     return chan
 
 
@@ -35,11 +35,13 @@ async def on_ready():
     emails = getEmails()
     news_channel = get_news_channel()
     today_date = datetime.datetime.now().strftime('%b %#d %Y')
+    to_publish = []
     t = await news_channel.send("Blue Politics News Brief for " + today_date)
-    try:
-        await t.publish()
-    except Exception as e:
-        print(e)
+    to_publish.append(t)
+##    try:
+##        await t.publish()
+##    except Exception as e:
+##        print(e)
 
     regions = {'Top of the Agenda': {'color': 0x888888, 'icon': ':newspaper: '},
                'Europe': {'color': 0x1fc41f, 'icon': ':flag_eu: '},
@@ -65,12 +67,18 @@ async def on_ready():
         except Exception as e:
             print("thumbnail set failed: "+str(e))
         p = await news_channel.send(embed=msg)
-        try:
-            await p.publish()
-        except Exception as e:
-            print(e)
+        to_publish.append(p)
+##        try:
+##            await p.publish()
+##        except Exception as e:
+##            print(e)
 
     await news_channel.send('<@&999326914487529543> Your daily news brief is above!')
+    for i in to_publish:
+        try:
+            await i.publish()
+        except:
+            pass
     await client.close()
 
 
