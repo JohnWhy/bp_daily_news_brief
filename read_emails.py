@@ -105,6 +105,8 @@ def parse_body(body):
         if i.getText().strip() == 'Analysis':  # remove any analysis and it's associated text
             texts.remove(texts[texts.index(i) + 1])
             texts.remove(texts[texts.index(i)])
+        if 'Editor’s note:' in i.getText().strip():
+            texts.remove(texts[texts.index(i)])
     for i in texts:
         text = i.getText()
         links = i.find_all('a')
