@@ -19,7 +19,7 @@ def get_news_channel():
     for e in client.guilds:
         if e.id == 600796603967602724:
             for chan in e.channels:
-                if chan.id == 999327978708275262:
+                if chan.id == 773402321739710465:
                     return chan
 
 
@@ -50,14 +50,18 @@ async def on_ready():
                'Americas': {'color': 0x0EFF64, 'icon': ':earth_americas: '},
                'Sub-Saharan Africa': {'color': 0xa95eff, 'icon': ':earth_africa: '},
                'South and Central Asia': {'color': 0xe67409, 'icon': ':earth_asia: '},
-               'Pacific Rim': {'color': 0x00F8FF, 'icon': ':island: '}}
+               'Pacific Rim': {'color': 0x00F8FF, 'icon': ':island: '},
+               'Default': {'color': 0x909090, 'icon': ':newspaper: '}}
 
     stories = parse_body(emails[0]['decoded'])
     for story in stories:
         headline = ':small_blue_diamond: ' + story['header']
         text = story['text']
         region = story['region']
-        msg = discord.Embed(title=regions[region]['icon'] + region,
+        region_title = region
+        if region not in regions.keys():
+            region = 'Default'
+        msg = discord.Embed(title=regions[region]['icon'] + region_title,
                             description='**'+headline+'**'+text,
                             color=regions[region]['color'])
         msg.set_footer(text='• ' + today_date +
