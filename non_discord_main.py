@@ -10,5 +10,5 @@ def prev_weekday(adate):
 
 today = prev_weekday(datetime.datetime.now())
 emails = getEmails()
-decoded = emails[0]['decoded']
-body = parse_body(decoded)
+body = emails[0]['decoded']
+soup = BeautifulSoup(body, 'html.parser')
