@@ -12,3 +12,4 @@ today = prev_weekday(datetime.datetime.now())
 emails = getEmails()
 body = emails[0]['decoded']
 soup = BeautifulSoup(body, 'html.parser')
+stories = parse_body(emails[0]['decoded'])

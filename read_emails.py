@@ -96,8 +96,10 @@ def parse_body(body):
     headlines = soup.find_all('h1')
     texts = soup.find_all('div', style="font-family:sans-serif")
     if len(texts) == 0:
-        texts = soup.find_all('div', style="font-family: sans-serif")
+        texts = soup.find_all('div', style="font-family:sans-serif")
     regions = soup.find_all('span', style="font-size:13px")
+    if len(regions) == 0:
+        regions = soup.find_all('span', style="font-size:13px;")
     texts.remove(texts[0])  # remove date
     texts.remove(texts[-1])  # remove Email preferences
     final_texts = []
